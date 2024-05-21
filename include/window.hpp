@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ncurses.h>
+#include <string>
 
 class Window {
 public:
@@ -9,8 +10,8 @@ public:
 
   inline int refresh() { return wrefresh(this->w); }
 
-  template<typename... Args> inline int printf(const char* s, Args... args) {
-    return wprintw(this->w, s, args...);
+  template<typename... Args> inline int printf(std::string s, Args... args) {
+    return wprintw(this->w, s.c_str(), args...);
   }
 
   WINDOW *w;

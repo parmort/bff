@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <locale>
+#include <filesystem>
 
 #include "window.hpp"
 
@@ -7,22 +8,33 @@ int main() {
   setlocale(LC_ALL, "");
 
   initscr();
-  raw();
+  cbreak();
   keypad(stdscr, true);
   noecho();
   refresh();
 
-  Window input_bar = Window(1, COLS, 0, 0);
-  input_bar.printf("Hello World");
-  input_bar.refresh();
+  std::filesystem::path cwd = std::filesystem::current_path();
 
-  BorderedWindow sidebar = BorderedWindow(LINES-1, 25, 1, 0);
+  Window titlebar = Window(1, COLS, 0, 0);
+  titlebar.printf(cwd.string());
+  titlebar.refresh();
+
+  BorderedWindow sidebar = BorderedWindow(LINES-2, 25, 1, 0);
   sidebar.refresh();
 
-  BorderedWindow browser = BorderedWindow(LINES-1, COLS-25, 1, 25);
+  BorderedWindow browser = BorderedWindow(LINES-2, COLS-25, 1, 25);
   browser.refresh();
 
-  getch();
+  Window commandline = Window(1, COLS, LINES-1, 0);
+  commandline.printf(":");
+  commandline.refresh();
+
+  char c;
+  while ((c = getch()) != '\n') {
+    commandline.printf(std::string{c});
+    commandline.refresh();
+  }
+
   endwin();
   return 0;
 }
