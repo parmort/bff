@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/explorer.dir/src/main.cpp.o"
   "CMakeFiles/explorer.dir/src/main.cpp.o.d"
+  "CMakeFiles/explorer.dir/src/window.cpp.o"
+  "CMakeFiles/explorer.dir/src/window.cpp.o.d"
   "explorer"
   "explorer.pdb"
 )

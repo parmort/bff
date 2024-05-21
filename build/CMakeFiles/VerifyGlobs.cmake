@@ -6,6 +6,7 @@ cmake_policy(SET CMP0009 NEW)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/nolan/code/filebrowser/src/*.cpp")
 set(OLD_GLOB
   "/home/nolan/code/filebrowser/src/main.cpp"
+  "/home/nolan/code/filebrowser/src/window.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
