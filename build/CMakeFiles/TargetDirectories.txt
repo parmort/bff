@@ -1,3 +1,0 @@
-/home/nolan/code/filebrowser/build/CMakeFiles/explorer.dir
-/home/nolan/code/filebrowser/build/CMakeFiles/edit_cache.dir
-/home/nolan/code/filebrowser/build/CMakeFiles/rebuild_cache.dir
