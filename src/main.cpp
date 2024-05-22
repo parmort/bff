@@ -3,8 +3,9 @@
 #include <filesystem>
 
 #include "window.hpp"
+#include "commandline.hpp"
 
-void get_command(Window *cmd);
+void parseCommand(std::string cmd);
 void exit_program();
 
 int main() {
@@ -15,26 +16,27 @@ int main() {
   keypad(stdscr, true);
   noecho();
   refresh();
+  curs_set(0);
 
   std::filesystem::path cwd = std::filesystem::current_path();
 
-  Window titlebar = Window(1, COLS, 0, 0);
-  titlebar.printf(cwd.string());
-  titlebar.refresh();
+  const BorderChars browserBorder { .tl=ACS_TTEE, .bl=ACS_BTEE };
 
   Window sidebar = Window(LINES-2, 26, 1, 0, BorderChars());
-
-  const BorderChars browserBorder { .tl=ACS_TTEE, .bl=ACS_BTEE };
   Window browser = Window(LINES-2, COLS-25, 1, 25, browserBorder);
+  CommandLine commandline = CommandLine(LINES-1, 0);
 
-  Window commandline = Window(1, COLS, LINES-1, 0);
+  Window titlebar = Window(1, COLS, 0, 0);
+  titlebar.win_print(cwd.string());
+  titlebar.win_refresh();
 
   char c;
   while (true) {
     c = getch();
     switch(c) {
       case ':':
-        get_command(&commandline);
+        std::string cmd = commandline.get_command();
+        parseCommand(cmd);
         break;
     }
   }
@@ -47,28 +49,8 @@ void exit_program() {
   exit(0);
 }
 
-void get_command(Window *cmd) {
-  std::string buf;
-  char c = ':';
-
-  do {
-    switch(c) {
-      case (char)KEY_BACKSPACE:
-        buf.pop_back();
-        break;
-      default:
-        buf.push_back(c);
-    }
-
-    wclear(cmd->w);
-    mvwprintw(cmd->w, 0, 0, "%s", buf.c_str());
-    cmd->refresh();
-  } while((c = getch()) != '\n');
-
-  if (buf == ":q") {
+void parseCommand(std::string cmd) {
+  if (cmd == ":q") {
     exit_program();
   }
-
-  wclear(cmd->w);
-  cmd->refresh();
 }

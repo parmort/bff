@@ -20,13 +20,20 @@ public:
   Window(int height, int width, int y, int x, BorderChars border); 
   ~Window();
 
-  inline int refresh() { return wrefresh(this->w); }
+  inline int win_refresh() { return wrefresh(m_win); }
+  inline int win_clear() { return wclear(m_win); }
 
-  template<typename... Args> inline int printf(std::string s, Args... args) {
-    return wprintw(this->w, s.c_str(), args...);
+  template<typename... Args>
+  inline int win_print(std::string s, Args... args) {
+    return wprintw(m_win, s.c_str(), args...);
   }
 
-  WINDOW *w;
+  template<typename... Args>
+  inline int win_mvprint(int y, int x, std::string s, Args... args) {
+    return mvwprintw(m_win, y, x, s.c_str(), args...);
+  }
+
+  WINDOW *m_win;
 private:
   int m_height, m_width;
   int m_y, m_x;
