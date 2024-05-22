@@ -7,6 +7,7 @@ Window::Window(int height, int width, int y, int x) :
 }
 
 Window::~Window() {
+  wclear(this->w);
   delwin(w);
 }
 

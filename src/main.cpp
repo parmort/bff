@@ -1,14 +1,17 @@
-#include <ncurses.h>
+#include <curses.h>
 #include <locale>
 #include <filesystem>
 
 #include "window.hpp"
 
+void get_command(Window *cmd);
+void exit_program();
+
 int main() {
   setlocale(LC_ALL, "");
 
   initscr();
-  cbreak();
+  raw();
   keypad(stdscr, true);
   noecho();
   refresh();
@@ -19,22 +22,55 @@ int main() {
   titlebar.printf(cwd.string());
   titlebar.refresh();
 
-  BorderedWindow sidebar = BorderedWindow(LINES-2, 25, 1, 0);
+  BorderedWindow sidebar = BorderedWindow(LINES-2, 26, 1, 0);
   sidebar.refresh();
 
-  BorderedWindow browser = BorderedWindow(LINES-2, COLS-25, 1, 25);
+  Window browser = Window(LINES-2, COLS-25, 1, 25);
+  wborder(browser.w, 0, 0, 0, 0, ACS_TTEE, 0, ACS_BTEE, 0);
   browser.refresh();
 
   Window commandline = Window(1, COLS, LINES-1, 0);
-  commandline.printf(":");
   commandline.refresh();
 
   char c;
-  while ((c = getch()) != '\n') {
-    commandline.printf(std::string{c});
-    commandline.refresh();
+  while ((c = getch()) != (char)KEY_F(1)) {
+    switch(c) {
+      case ':':
+        get_command(&commandline);
+        break;
+    }
   }
 
+  exit_program();
+}
+
+void exit_program() {
   endwin();
-  return 0;
+  exit(0);
+}
+
+void get_command(Window *cmd) {
+  std::string buf;
+  char c = ':';
+
+  do {
+    switch(c) {
+      case (char)KEY_BACKSPACE:
+        buf.pop_back();
+        break;
+      default:
+        buf.push_back(c);
+    }
+
+    wclear(cmd->w);
+    mvwprintw(cmd->w, 0, 0, "%s", buf.c_str());
+    cmd->refresh();
+  } while((c = getch()) != '\n');
+
+  if (buf == ":q") {
+    exit_program();
+  }
+
+  wclear(cmd->w);
+  cmd->refresh();
 }
