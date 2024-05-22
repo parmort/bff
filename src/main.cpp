@@ -22,18 +22,16 @@ int main() {
   titlebar.printf(cwd.string());
   titlebar.refresh();
 
-  BorderedWindow sidebar = BorderedWindow(LINES-2, 26, 1, 0);
-  sidebar.refresh();
+  Window sidebar = Window(LINES-2, 26, 1, 0, BorderChars());
 
-  Window browser = Window(LINES-2, COLS-25, 1, 25);
-  wborder(browser.w, 0, 0, 0, 0, ACS_TTEE, 0, ACS_BTEE, 0);
-  browser.refresh();
+  const BorderChars browserBorder { .tl=ACS_TTEE, .bl=ACS_BTEE };
+  Window browser = Window(LINES-2, COLS-25, 1, 25, browserBorder);
 
   Window commandline = Window(1, COLS, LINES-1, 0);
-  commandline.refresh();
 
   char c;
-  while ((c = getch()) != (char)KEY_F(1)) {
+  while (true) {
+    c = getch();
     switch(c) {
       case ':':
         get_command(&commandline);
