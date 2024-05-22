@@ -1,4 +1,4 @@
-# filebrowser
+# BFF
 
 A terminal-based curses filebrowser. WIP.
 

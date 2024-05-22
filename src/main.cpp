@@ -18,7 +18,7 @@ int main() {
   refresh();
   curs_set(0);
 
-  std::filesystem::path cwd = std::filesystem::current_path();
+  auto cwd = std::filesystem::current_path();
 
   const BorderChars browserBorder { .tl=ACS_TTEE, .bl=ACS_BTEE };
 
