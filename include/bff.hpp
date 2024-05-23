@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common.hpp"
+#include "components/browser.hpp"
 #include "components/command_line.hpp"
 #include "components/title_bar.hpp"
 #include "components/window.hpp"
@@ -15,10 +16,11 @@ public:
   int run();
 
 private:
+  Signal handle_key(char c);
   Signal parse_command(string cmd);
 
-  Window *m_sidebar;
-  Window *m_browser;
+  Browser *m_sidebar;
+  Browser *m_browser;
   TitleBar *m_title_bar;
   CommandLine *m_command_line;
 };
