@@ -2,21 +2,23 @@
 
 #include "commandline.hpp"
 
-CommandLine::CommandLine(int y, int x) : Window(1, COLS, y, x) { }
+namespace bff {
 
-std::string CommandLine::get_command() {
-  std::string buf;
+CommandLine::CommandLine(int y, int x) : Window(1, COLS, y, x) {}
+
+string CommandLine::get_command() {
+  string buf;
   char c = ':';
 
   curs_set(1);
 
   do {
     switch (c) {
-      case (char)KEY_BACKSPACE:
-        buf.pop_back();
-      default:
-        buf.push_back(c);
-        break;
+    case (char)KEY_BACKSPACE:
+      buf.pop_back();
+    default:
+      buf.push_back(c);
+      break;
     }
 
     win_clear();
@@ -30,3 +32,5 @@ std::string CommandLine::get_command() {
 
   return buf;
 }
+
+} // namespace bff

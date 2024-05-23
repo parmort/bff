@@ -1,11 +1,14 @@
 #pragma once
 
-#include <string>
-
+#include "common.hpp"
 #include "window.hpp"
+
+namespace bff {
 
 class CommandLine : Window {
 public:
   CommandLine(int y, int x);
-  std::string get_command();
+  string get_command();
 };
+
+} // namespace bff
