@@ -7,10 +7,13 @@ A terminal-based curses filebrowser. WIP.
 Ensure `curses` is installed, along with `cmake` and `make`. Run `make` to
 compile. `make clean` cleans build files.
 
-## Commands
+## Mappings
 
-Type `:` to type a command into the bottom line. The following are
-valid commands (or will be):
+| Key | Description |
+|-----|-------------|
+| `:` | Enter command mode |
+
+## Commands
 
 | CMD | Impl | Description |
 |-----|------|-------------|
