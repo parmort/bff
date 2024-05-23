@@ -5,6 +5,7 @@
 #include "components/command_line.hpp"
 #include "components/title_bar.hpp"
 #include "components/window.hpp"
+#include "fs.hpp"
 
 namespace bff {
 
@@ -19,6 +20,7 @@ private:
   Signal handle_key(char c);
   Signal parse_command(string cmd);
 
+  FS fs;
   Browser *m_sidebar;
   Browser *m_browser;
   TitleBar *m_title_bar;

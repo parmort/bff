@@ -7,14 +7,14 @@ BFF::BFF()
       m_browser(new Browser((COLS / 2) + 1, 1, (COLS / 2) - 1,
                             {.tl = ACS_TTEE, .bl = ACS_BTEE})),
       m_command_line(new CommandLine(LINES - 1, 0)),
-      m_title_bar(new TitleBar(0, 0)) {}
+      m_title_bar(new TitleBar(0, 0)), fs(FS()) {}
 
 int BFF::run() {
   Signal sig = Signal::Continue;
 
   while (sig == Signal::Continue) {
-    m_sidebar->update();
-    m_browser->update();
+    m_sidebar->populate(fs.parent());
+    m_browser->populate(fs.cwd());
 
     sig = handle_key(getch());
   }

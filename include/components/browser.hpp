@@ -8,7 +8,7 @@ namespace bff {
 class Browser : Pane {
 public:
   Browser(int width, int y, int x, BorderChars border);
-  void update();
+  void populate(fs::path path);
 };
 
 } // namespace bff
