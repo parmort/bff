@@ -12,6 +12,7 @@ compile. `make clean` cleans build files.
 | Key | Description |
 |-----|-------------|
 | `:` | Enter command mode |
+| `h` | Traverse to the parent |
 | `j` | Move selection down |
 | `k` | Move selection up |
 | `l` | Traverse into the folder |

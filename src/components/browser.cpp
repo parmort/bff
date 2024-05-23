@@ -18,6 +18,16 @@ void Browser::populate(fs::path path) {
   std::sort(m_directory->begin(), m_directory->end(), compare_entries);
 }
 
+void Browser::select(fs::path path) {
+  for (auto it = m_directory->begin(); it != m_directory->end(); ++it) {
+    if (it->path().string() != path.string())
+      continue;
+
+    m_sel = it - m_directory->begin();
+    return;
+  }
+}
+
 void Browser::redraw() {
   win_clear();
 

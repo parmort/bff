@@ -9,6 +9,13 @@ BFF::BFF()
       m_command_line(new CommandLine(LINES - 1, 0)),
       m_title_bar(new TitleBar(0, 0)), fs(std::make_unique<FS>(FS())) {}
 
+BFF::~BFF() {
+  delete m_sidebar;
+  delete m_browser;
+  delete m_command_line;
+  delete m_title_bar;
+}
+
 int BFF::run() {
   Signal sig = Signal::Continue;
 
@@ -52,6 +59,17 @@ Signal BFF::handle_key(char c) {
 
     m_sidebar->populate(fs->cwd());
     m_browser->populate(fs->cwd());
+
+    break;
+  }
+  case 'h': {
+    fs::path sel = fs->cwd();
+    fs.reset(new FS(fs->parent()));
+
+    m_sidebar->populate(fs->cwd());
+
+    m_browser->populate(fs->cwd());
+    m_browser->select(sel);
 
     break;
   }

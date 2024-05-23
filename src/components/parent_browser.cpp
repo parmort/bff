@@ -10,13 +10,7 @@ ParentBrowser::ParentBrowser(int width, int y, int x, BorderChars border)
 void ParentBrowser::populate(fs::path path) {
   m_directory = FS::dir_contents(path.parent_path());
   std::sort(m_directory->begin(), m_directory->end(), compare_entries);
-
-  for (auto it = m_directory->begin(); it != m_directory->end(); ++it) {
-    if (it->path().string() == path.string()) {
-      m_sel = it - m_directory->begin();
-      break;
-    }
-  }
+  select(path);
 }
 
 } // namespace bff

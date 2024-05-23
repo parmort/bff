@@ -16,6 +16,8 @@ public:
   void move_up();
   bool descend(fs::path *path);
 
+  void select(fs::path path);
+
 protected:
   static bool compare_entries(const fs::directory_entry a,
                        const fs::directory_entry b);

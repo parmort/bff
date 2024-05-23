@@ -17,6 +17,7 @@ enum class Signal { Continue, Quit };
 class BFF {
 public:
   BFF();
+  ~BFF();
   int run();
 
 private:
