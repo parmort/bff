@@ -1,6 +1,6 @@
 #include <curses.h>
 
-#include "commandline.hpp"
+#include "components/command_line.hpp"
 
 namespace bff {
 

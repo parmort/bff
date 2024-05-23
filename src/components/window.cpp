@@ -1,4 +1,4 @@
-#include "window.hpp"
+#include "components/window.hpp"
 
 namespace bff {
 

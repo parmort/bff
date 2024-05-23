@@ -1,8 +1,9 @@
 #pragma once
 
-#include "commandline.hpp"
 #include "common.hpp"
-#include "window.hpp"
+#include "components/command_line.hpp"
+#include "components/title_bar.hpp"
+#include "components/window.hpp"
 
 namespace bff {
 
@@ -18,7 +19,7 @@ private:
 
   Window *m_sidebar;
   Window *m_browser;
-  Window *m_title_bar;
+  TitleBar *m_title_bar;
   CommandLine *m_command_line;
 };
 
