@@ -16,6 +16,9 @@ int BFF::run() {
     m_sidebar->populate(fs.parent());
     m_browser->populate(fs.cwd());
 
+    m_sidebar->redraw();
+    m_browser->redraw();
+
     sig = handle_key(getch());
   }
 

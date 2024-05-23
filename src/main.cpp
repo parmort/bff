@@ -2,6 +2,7 @@
 #include <locale>
 
 #include "bff.hpp"
+#include "colors.hpp"
 
 using namespace bff;
 
@@ -14,6 +15,10 @@ int main() {
   noecho();
   refresh();
   curs_set(0);
+
+  start_color();
+  use_default_colors();
+  colors::init();
 
   BFF bff = BFF();
 

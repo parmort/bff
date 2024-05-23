@@ -22,7 +22,7 @@ public:
     return mvwprintw(m_content, y, x, s.c_str(), args...);
   }
 
-private:
+protected:
   WINDOW *m_content;
 };
 
