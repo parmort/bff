@@ -1,13 +1,14 @@
 #pragma once
 
 #include "common.hpp"
-#include "components/window.hpp"
+#include "components/pane.hpp"
 
 namespace bff {
 
-class Browser : Window {
+class Browser : Pane {
 public:
   Browser(int width, int y, int x, BorderChars border);
+  void update();
 };
 
 } // namespace bff

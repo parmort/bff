@@ -1,5 +1,3 @@
-#include <filesystem>
-
 #include "bff.hpp"
 
 namespace bff {
@@ -15,6 +13,9 @@ int BFF::run() {
   Signal sig = Signal::Continue;
 
   while (sig == Signal::Continue) {
+    m_sidebar->update();
+    m_browser->update();
+
     sig = handle_key(getch());
   }
 

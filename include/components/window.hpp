@@ -33,9 +33,8 @@ public:
     return mvwprintw(m_win, y, x, s.c_str(), args...);
   }
 
+protected:
   WINDOW *m_win;
-
-private:
   int m_height, m_width;
   int m_y, m_x;
 };
