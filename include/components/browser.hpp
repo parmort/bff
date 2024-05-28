@@ -3,6 +3,7 @@
 #include "common.hpp"
 #include "components/pane.hpp"
 #include "fs.hpp"
+#include "signal.hpp"
 
 namespace bff {
 
@@ -12,11 +13,11 @@ public:
 
   void populate();
   void redraw();
-  void move_down();
-  void move_up();
+  Signal move_down();
+  Signal move_up();
 
   void select(path path);
-  path get_selected();
+  directory_entry get_selected();
 
 protected:
   static bool compare_entries(const directory_entry a,

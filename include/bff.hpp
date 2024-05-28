@@ -8,10 +8,10 @@
 #include "components/command_line.hpp"
 #include "components/title_bar.hpp"
 #include "components/window.hpp"
+#include "signal.hpp"
+#include "key_handler.hpp"
 
 namespace bff {
-
-enum class Signal { Continue, Quit };
 
 class BFF {
 public:
@@ -20,15 +20,14 @@ public:
   int run();
 
 private:
-  Signal handle_key(char c);
-  Signal parse_command(string cmd);
-
   path m_path;
 
   ParentBrowser *m_sidebar;
   Browser *m_browser;
   TitleBar *m_title_bar;
   CommandLine *m_command_line;
+
+  KeyHandler *m_key_handler;
 };
 
 } // namespace bff

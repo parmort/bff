@@ -56,21 +56,22 @@ bool Browser::compare_entries(const directory_entry a, const directory_entry b) 
   return a.path().filename() < b.path().filename();
 }
 
-void Browser::move_down() {
-  if (m_sel+1 == m_directory.size())
-    return;
+Signal Browser::move_down() {
+  if (m_sel + 1 < m_directory.size())
+    m_sel++;
 
-  m_sel++;
+  return Signal::Continue;
 }
 
-void Browser::move_up() {
-  if (m_sel == 0) return;
+Signal Browser::move_up() {
+  if (m_sel - 1 > 0)
+    m_sel--;
 
-  m_sel--;
+  return Signal::Continue;
 }
 
-path Browser::get_selected() {
-  return m_directory[m_sel].path();
+directory_entry Browser::get_selected() {
+  return m_directory[m_sel];
 }
 
 } // namespace bff
