@@ -7,9 +7,9 @@ namespace bff {
 
 class ParentBrowser : public Browser {
 public:
-  ParentBrowser(int width, int y, int x, BorderChars border);
+  ParentBrowser(const path &p, int width, int y, int x, BorderChars border);
 
-  void populate(fs::path path);
+  void populate();
 };
 
-}
+} // namespace bff

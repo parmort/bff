@@ -5,24 +5,10 @@
 
 #include "common.hpp"
 
-namespace bff {
+namespace bff::fs {
 
-namespace fs = std::filesystem;
-using std::vector;
+typedef vector<directory_entry> dir_contents;
 
-typedef vector<fs::directory_entry> directory_contents;
+dir_contents get_dir_contents(path);
 
-class FS {
-public:
-  FS(fs::path cwd);
-  FS();
-
-  inline fs::path cwd() { return m_cwd; }
-  inline fs::path parent() { return m_cwd.parent_path(); }
-  static directory_contents *dir_contents(fs::path);
-
-private:
-  fs::path m_cwd;
-};
-
-} // namespace bff
+} // namespace bff::fs

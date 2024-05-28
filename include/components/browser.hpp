@@ -8,22 +8,23 @@ namespace bff {
 
 class Browser : protected Pane {
 public:
-  Browser(int width, int y, int x, BorderChars border);
+  Browser(const path &p, int width, int y, int x, BorderChars border);
 
-  void populate(fs::path path);
+  void populate();
   void redraw();
   void move_down();
   void move_up();
-  bool descend(fs::path *path);
 
-  void select(fs::path path);
+  void select(path path);
+  path get_selected();
 
 protected:
-  static bool compare_entries(const fs::directory_entry a,
-                       const fs::directory_entry b);
+  static bool compare_entries(const directory_entry a,
+                       const directory_entry b);
 
-  int m_sel = 0;
-  vector<fs::directory_entry>* m_directory;
+  const path &m_path;
+  int m_sel;
+  fs::dir_contents m_directory;
 };
 
 } // namespace bff

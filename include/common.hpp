@@ -10,6 +10,7 @@ namespace bff {
 using std::string;
 using std::vector;
 
-namespace fs = std::filesystem;
+using std::filesystem::path;
+using std::filesystem::directory_entry;
 
 } // namespace bff

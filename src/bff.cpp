@@ -2,12 +2,15 @@
 
 namespace bff {
 
+using std::filesystem::current_path;
+
 BFF::BFF()
-    : m_sidebar(new ParentBrowser(COLS / 2, 1, 0, BorderChars())),
-      m_browser(new Browser((COLS / 2) + 1, 1, (COLS / 2) - 1,
+    : m_path(std::filesystem::current_path()),
+      m_sidebar(new ParentBrowser(m_path, COLS / 2, 1, 0, BorderChars())),
+      m_browser(new Browser(m_path, (COLS / 2) + 1, 1, (COLS / 2) - 1,
                             {.tl = ACS_TTEE, .bl = ACS_BTEE})),
       m_command_line(new CommandLine(LINES - 1, 0)),
-      m_title_bar(new TitleBar(0, 0)), fs(std::make_unique<FS>(FS())) {}
+      m_title_bar(new TitleBar(0, 0)) {}
 
 BFF::~BFF() {
   delete m_sidebar;
@@ -19,8 +22,8 @@ BFF::~BFF() {
 int BFF::run() {
   Signal sig = Signal::Continue;
 
-  m_sidebar->populate(fs->cwd());
-  m_browser->populate(fs->cwd());
+  m_sidebar->populate();
+  m_browser->populate();
 
   while (sig == Signal::Continue) {
     m_sidebar->redraw();
@@ -50,25 +53,20 @@ Signal BFF::handle_key(char c) {
     break;
   }
   case 'l': {
-    fs::path p;
+    m_path = path(m_browser->get_selected());
 
-    if (not m_browser->descend(&p))
-      break;
-
-    fs.reset(new FS(p));
-
-    m_sidebar->populate(fs->cwd());
-    m_browser->populate(fs->cwd());
+    m_sidebar->populate();
+    m_browser->populate();
 
     break;
   }
   case 'h': {
-    fs::path sel = fs->cwd();
-    fs.reset(new FS(fs->parent()));
+    path sel = m_path;
+    m_path = path(m_path.parent_path());
 
-    m_sidebar->populate(fs->cwd());
+    m_sidebar->populate();
+    m_browser->populate();
 
-    m_browser->populate(fs->cwd());
     m_browser->select(sel);
 
     break;
