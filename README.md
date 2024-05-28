@@ -19,6 +19,6 @@ compile. `make clean` cleans build files.
 
 ## Commands
 
-| CMD | Impl | Description |
-|-----|------|-------------|
-| `:q` | yes | Exit the program. |
+| CMD | Description |
+|-----|-------------|
+| `:q` | Exit the program. |
