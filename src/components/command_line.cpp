@@ -16,6 +16,7 @@ string CommandLine::get_command() {
     switch (c) {
     case (char)KEY_BACKSPACE:
       buf.pop_back();
+      break;
     default:
       buf.push_back(c);
       break;
