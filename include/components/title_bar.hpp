@@ -13,7 +13,7 @@ public:
   void accept(Event e) override;
 
 private:
-  string cwd();
+  void build();
 
   const path &m_path;
 };

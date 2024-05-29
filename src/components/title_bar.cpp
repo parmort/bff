@@ -1,5 +1,6 @@
-#include <filesystem>
+#include <format>
 
+#include "colors.hpp"
 #include "components/title_bar.hpp"
 
 namespace bff {
@@ -12,10 +13,17 @@ void TitleBar::accept(Event e) {
     return;
 
   win_clear();
-  win_print(m_path.string());
+  build();
   win_refresh();
 }
 
-string TitleBar::cwd() { return std::filesystem::current_path().string(); }
+void TitleBar::build() {
+  wattron(m_win, A_BOLD | COLOR_PAIR(colors::Directory));
+
+  win_print("%s/", m_path.parent_path().c_str());
+  wattroff(m_win, COLOR_PAIR(colors::Directory));
+
+  win_print(m_path.filename());
+}
 
 } // namespace bff
