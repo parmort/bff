@@ -6,9 +6,8 @@ using std::filesystem::current_path;
 
 BFF::BFF()
     : m_path(std::filesystem::current_path()),
-      m_sidebar(new ParentBrowser(m_path, COLS / 2, 1, 0, BorderChars())),
-      m_browser(new Browser(m_path, (COLS / 2) + 1, 1, (COLS / 2) - 1,
-                            {.tl = ACS_TTEE, .bl = ACS_BTEE})),
+      m_sidebar(new ParentBrowser(m_path, COLS / 2, 1, 0)),
+      m_browser(new Browser(m_path, (COLS / 2) + 1, 1, (COLS / 2) - 1)),
       m_command_line(new CommandLine(LINES - 1, 0)),
       m_title_bar(new TitleBar(0, 0)),
       m_key_handler(

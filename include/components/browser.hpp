@@ -10,6 +10,7 @@ namespace bff {
 class Browser : protected Pane {
 public:
   Browser(const path &p, int width, int y, int x, BorderChars border);
+  Browser(const path &p, int width, int y, int x);
 
   void populate();
   void redraw();

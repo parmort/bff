@@ -11,6 +11,9 @@ void color_entry(WINDOW* win, const directory_entry entry);
 Browser::Browser(const path &p, int width, int y, int x, BorderChars border)
     : Pane(LINES - 2, width, y, x, border), m_path(p), m_sel(0) {}
 
+Browser::Browser(const path &p, int width, int y, int x)
+    : Browser(p, width, y, x, {.tl = ACS_TTEE, .bl = ACS_BTEE}) {}
+
 void Browser::populate() {
   m_sel = 0;
   m_directory = fs::get_dir_contents(m_path);

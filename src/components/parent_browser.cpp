@@ -5,9 +5,8 @@
 
 namespace bff {
 
-ParentBrowser::ParentBrowser(const path &p, int width, int y, int x,
-                             BorderChars border)
-    : Browser(p, width, y, x, border) {}
+ParentBrowser::ParentBrowser(const path &p, int width, int y, int x)
+    : Browser(p, width, y, x, BorderChars()) {}
 
 void ParentBrowser::populate() {
   m_directory = fs::get_dir_contents(m_path.parent_path());
