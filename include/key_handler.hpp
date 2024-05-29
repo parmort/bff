@@ -20,8 +20,8 @@ enum Mappings : char {
 
 class KeyHandler {
 public:
-  KeyHandler(CommandLine *const cmd_line, Browser *const browser,
-             ParentBrowser *const parent, path *const p);
+  KeyHandler(unique_ptr<CommandLine> &cmd_line, unique_ptr<Browser> &browser,
+             unique_ptr<ParentBrowser> &parent, path &p);
 
   Signal handle_key(char c);
 
@@ -31,10 +31,10 @@ private:
   Signal descend();
   Signal ascend();
 
-  CommandLine *const m_cmd_line;
-  Browser *const m_browser;
-  ParentBrowser *const m_parent;
-  path *const m_path;
+  unique_ptr<CommandLine> &m_cmd_line;
+  unique_ptr<Browser> &m_browser;
+  unique_ptr<ParentBrowser> &m_parent;
+  path &m_path;
 };
 
 } // namespace bff

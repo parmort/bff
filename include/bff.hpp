@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "common.hpp"
 #include "components/browser.hpp"
 #include "components/parent_browser.hpp"
@@ -15,19 +13,18 @@ namespace bff {
 
 class BFF {
 public:
-  BFF();
-  ~BFF();
+  BFF(int parent_size);
   int run();
 
 private:
   path m_path;
 
-  ParentBrowser *m_sidebar;
-  Browser *m_browser;
-  TitleBar *m_title_bar;
-  CommandLine *m_command_line;
+  unique_ptr<ParentBrowser> m_sidebar;
+  unique_ptr<Browser> m_browser;
+  unique_ptr<TitleBar> m_title_bar;
+  unique_ptr<CommandLine> m_command_line;
 
-  KeyHandler *m_key_handler;
+  unique_ptr<KeyHandler> m_key_handler;
 };
 
 } // namespace bff

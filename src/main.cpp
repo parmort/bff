@@ -20,7 +20,7 @@ int main() {
   use_default_colors();
   colors::init();
 
-  BFF bff = BFF();
+  BFF bff = BFF(COLS / 2);
 
   int retcode = bff.run();
 

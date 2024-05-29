@@ -2,8 +2,9 @@
 
 namespace bff {
 
-KeyHandler::KeyHandler(CommandLine *const cmd_line, Browser *const browser,
-                       ParentBrowser *const parent, path *const p)
+KeyHandler::KeyHandler(unique_ptr<CommandLine> &cmd_line,
+                       unique_ptr<Browser> &browser,
+                       unique_ptr<ParentBrowser> &parent, path &p)
     : m_cmd_line(cmd_line), m_browser(browser), m_parent(parent), m_path(p) {}
 
 Signal KeyHandler::handle_key(char c) {
@@ -34,8 +35,8 @@ Signal KeyHandler::parse_command(string cmd) {
 }
 
 Signal KeyHandler::ascend() {
-  path sel = *m_path;
-  *m_path = path(m_path->parent_path());
+  path sel = m_path;
+  m_path = path(m_path.parent_path());
 
   m_parent->populate();
   m_browser->populate();
@@ -51,7 +52,7 @@ Signal KeyHandler::descend() {
   if (!child.is_directory())
     return Signal::Continue;
 
-  *m_path = path(child);
+  m_path = path(child);
 
   m_parent->populate();
   m_browser->populate();

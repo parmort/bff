@@ -4,21 +4,15 @@ namespace bff {
 
 using std::filesystem::current_path;
 
-BFF::BFF()
+BFF::BFF(int parent_size)
     : m_path(std::filesystem::current_path()),
-      m_sidebar(new ParentBrowser(m_path, COLS / 2, 1, 0)),
-      m_browser(new Browser(m_path, (COLS / 2) + 1, 1, (COLS / 2) - 1)),
-      m_command_line(new CommandLine(LINES - 1, 0)),
-      m_title_bar(new TitleBar(0, 0)),
-      m_key_handler(
-          new KeyHandler(m_command_line, m_browser, m_sidebar, &m_path)) {}
-
-BFF::~BFF() {
-  delete m_sidebar;
-  delete m_browser;
-  delete m_command_line;
-  delete m_title_bar;
-}
+      m_sidebar(make_unique<ParentBrowser>(m_path, parent_size, 1, 0)),
+      m_browser(
+          make_unique<Browser>(m_path, (parent_size) + 1, 1, (parent_size)-1)),
+      m_command_line(make_unique<CommandLine>(LINES - 1, 0)),
+      m_title_bar(make_unique<TitleBar>(0, 0)),
+      m_key_handler(make_unique<KeyHandler>(m_command_line, m_browser,
+                                            m_sidebar, m_path)) {}
 
 int BFF::run() {
   Signal sig = Signal::Continue;
