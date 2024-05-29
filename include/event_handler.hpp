@@ -4,7 +4,14 @@
 
 namespace bff {
 
-enum class Event { Populate, Redraw, Ascend, Descend };
+enum class Event {
+  Populate,
+  Redraw,
+  Ascend,
+  Descend,
+  SelectionUp,
+  SelectionDown
+};
 
 class IEventListener {
 public:

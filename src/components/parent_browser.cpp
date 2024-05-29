@@ -13,6 +13,9 @@ void ParentBrowser::accept(Event e) {
   case Event::Populate:
     populate();
     break;
+  case Event::SelectionUp:
+  case Event::SelectionDown:
+    break;
   default:
     Browser::accept(e);
     break;

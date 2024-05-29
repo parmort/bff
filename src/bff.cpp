@@ -6,14 +6,13 @@ using std::filesystem::current_path;
 
 BFF::BFF(int parent_size)
     : m_path(std::filesystem::current_path()),
+      m_ev(make_unique<EventHandler>()),
       m_parent(make_unique<ParentBrowser>(m_path, parent_size, 1, 0)),
       m_browser(
           make_unique<Browser>(m_path, (parent_size) + 1, 1, (parent_size)-1)),
       m_command_line(make_unique<CommandLine>(LINES - 1, 0)),
       m_title_bar(make_unique<TitleBar>(0, 0)),
-      m_key_handler(
-          make_unique<KeyHandler>(m_command_line, m_browser, m_parent, m_ev)),
-      m_ev(make_unique<EventHandler>()) {
+      m_key_handler(make_unique<KeyHandler>(m_command_line, m_ev)) {
   m_ev->subscribe(m_parent.get());
   m_ev->subscribe(m_browser.get());
   m_ev->subscribe(this);

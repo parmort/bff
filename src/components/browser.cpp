@@ -22,6 +22,12 @@ void Browser::accept(Event e) {
   case Event::Redraw:
     redraw();
     break;
+  case Event::SelectionUp:
+    move_up();
+    break;
+  case Event::SelectionDown:
+    move_down();
+    break;
   default:
     break;
   }

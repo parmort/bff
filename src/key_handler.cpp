@@ -3,10 +3,8 @@
 namespace bff {
 
 KeyHandler::KeyHandler(unique_ptr<CommandLine> &cmd_line,
-                       unique_ptr<Browser> &browser,
-                       unique_ptr<ParentBrowser> &parent,
                        unique_ptr<EventHandler> &ev)
-    : m_cmd_line(cmd_line), m_browser(browser), m_parent(parent), m_ev(ev) {}
+    : m_cmd_line(cmd_line), m_ev(ev) {}
 
 Signal KeyHandler::handle_key(char c) {
   switch (c) {
@@ -15,10 +13,10 @@ Signal KeyHandler::handle_key(char c) {
     return parse_command(cmd);
   }
   case keys::MoveSelectionDown:
-    m_browser->move_down();
+    m_ev->notify(Event::SelectionDown);
     break;
   case keys::MoveSelectionUp:
-    m_browser->move_up();
+    m_ev->notify(Event::SelectionUp);
     break;
   case keys::Descend:
     m_ev->notify(Event::Descend);
