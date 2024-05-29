@@ -11,10 +11,11 @@ BFF::BFF(int parent_size)
       m_browser(
           make_unique<Browser>(m_path, (parent_size) + 1, 1, (parent_size)-1)),
       m_command_line(make_unique<CommandLine>(LINES - 1, 0)),
-      m_title_bar(make_unique<TitleBar>(0, 0)),
+      m_title_bar(make_unique<TitleBar>(m_path, 0, 0)),
       m_key_handler(make_unique<KeyHandler>(m_command_line, m_ev)) {
   m_ev->subscribe(m_parent.get());
   m_ev->subscribe(m_browser.get());
+  m_ev->subscribe(m_title_bar.get());
   m_ev->subscribe(this);
 }
 

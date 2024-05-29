@@ -4,8 +4,15 @@
 
 namespace bff {
 
-TitleBar::TitleBar(int y, int x) : Window(1, COLS, y, x) {
-  win_print(cwd());
+TitleBar::TitleBar(const path &p, int y, int x)
+    : Window(1, COLS, y, x), m_path(p) {}
+
+void TitleBar::accept(Event e) {
+  if (e != Event::Redraw)
+    return;
+
+  win_clear();
+  win_print(m_path.string());
   win_refresh();
 }
 
