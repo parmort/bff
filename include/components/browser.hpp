@@ -2,15 +2,18 @@
 
 #include "common.hpp"
 #include "components/pane.hpp"
+#include "event_handler.hpp"
 #include "fs.hpp"
 #include "signal.hpp"
 
 namespace bff {
 
-class Browser : protected Pane {
+class Browser : protected Pane, public IEventListener {
 public:
   Browser(const path &p, int width, int y, int x, BorderChars border);
   Browser(const path &p, int width, int y, int x);
+
+  void accept(Event e) override;
 
   void populate();
   void redraw();

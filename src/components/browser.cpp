@@ -14,6 +14,19 @@ Browser::Browser(const path &p, int width, int y, int x, BorderChars border)
 Browser::Browser(const path &p, int width, int y, int x)
     : Browser(p, width, y, x, {.tl = ACS_TTEE, .bl = ACS_BTEE}) {}
 
+void Browser::accept(Event e) {
+  switch (e) {
+  case Event::Populate:
+    populate();
+    break;
+  case Event::Redraw:
+    redraw();
+    break;
+  default:
+    break;
+  }
+}
+
 void Browser::populate() {
   m_sel = 0;
   m_directory = fs::get_dir_contents(m_path);
@@ -67,7 +80,7 @@ Signal Browser::move_down() {
 }
 
 Signal Browser::move_up() {
-  if (m_sel - 1 > 0)
+  if (m_sel - 1 >= 0)
     m_sel--;
 
   return Signal::Continue;

@@ -8,18 +8,26 @@
 #include "components/window.hpp"
 #include "signal.hpp"
 #include "key_handler.hpp"
+#include "event_handler.hpp"
 
 namespace bff {
 
-class BFF {
+class BFF : public IEventListener {
 public:
   BFF(int parent_size);
   int run();
 
+  void accept(Event e) override;
+
+  void ascend();
+  void descend();
+
 private:
   path m_path;
 
-  unique_ptr<ParentBrowser> m_sidebar;
+  unique_ptr<EventHandler> m_ev;
+
+  unique_ptr<ParentBrowser> m_parent;
   unique_ptr<Browser> m_browser;
   unique_ptr<TitleBar> m_title_bar;
   unique_ptr<CommandLine> m_command_line;
