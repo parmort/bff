@@ -2,7 +2,6 @@
 
 #include "common.hpp"
 #include "window.hpp"
-#include "signal.hpp"
 
 namespace bff {
 

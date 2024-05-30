@@ -6,9 +6,9 @@
 #include "components/command_line.hpp"
 #include "components/title_bar.hpp"
 #include "components/window.hpp"
-#include "signal.hpp"
 #include "key_handler.hpp"
 #include "event_handler.hpp"
+#include "command.hpp"
 
 namespace bff {
 
@@ -19,11 +19,13 @@ public:
 
   void accept(Event e) override;
 
+private:
   void ascend();
   void descend();
+  void command_mode();
 
-private:
   path m_path;
+  bool running;
 
   unique_ptr<EventHandler> m_ev;
 
@@ -33,6 +35,7 @@ private:
   unique_ptr<CommandLine> m_command_line;
 
   unique_ptr<KeyHandler> m_key_handler;
+  unique_ptr<CommandHandler> m_cmd_handler;
 };
 
 } // namespace bff

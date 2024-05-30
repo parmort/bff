@@ -4,7 +4,6 @@
 #include "components/pane.hpp"
 #include "event_handler.hpp"
 #include "fs.hpp"
-#include "signal.hpp"
 
 namespace bff {
 
@@ -17,8 +16,8 @@ public:
 
   void populate();
   void redraw();
-  Signal move_down();
-  Signal move_up();
+  void move_down();
+  void move_up();
 
   void select(path path);
   directory_entry get_selected();

@@ -78,18 +78,16 @@ bool Browser::compare_entries(const directory_entry a, const directory_entry b) 
   return a.path().filename() < b.path().filename();
 }
 
-Signal Browser::move_down() {
-  if (m_sel + 1 < m_directory.size())
-    m_sel++;
-
-  return Signal::Continue;
+void Browser::move_down() {
+  if (m_sel + 1 >= m_directory.size())
+    return;
+  m_sel++;
 }
 
-Signal Browser::move_up() {
-  if (m_sel - 1 >= 0)
-    m_sel--;
-
-  return Signal::Continue;
+void Browser::move_up() {
+  if (m_sel - 1 < 0)
+    return;
+  m_sel--;
 }
 
 directory_entry Browser::get_selected() {

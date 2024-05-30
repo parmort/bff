@@ -10,7 +10,9 @@ enum class Event {
   Ascend,
   Descend,
   SelectionUp,
-  SelectionDown
+  SelectionDown,
+  CommandMode,
+  Quit
 };
 
 class IEventListener {
