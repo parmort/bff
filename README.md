@@ -1,6 +1,6 @@
 # BFF
 
-A terminal-based curses filebrowser. WIP.
+A terminal-based curses filebrowser. Unix only. WIP.
 
 ## Building
 
